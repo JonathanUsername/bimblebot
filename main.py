@@ -2,6 +2,9 @@ import discord
 import asyncio
 import yaml
 import logging
+import os
+
+token = os.environ['CLIENT_TOKEN']
 
 logging.basicConfig(level=logging.INFO)
 
@@ -37,6 +40,4 @@ async def on_message(message):
 
 
 with open(".secrets.yaml", 'r') as data:
-    secrets = yaml.safe_load(data)
-    print(secrets['token'])
-    client.run(secrets['token'])
+    client.run(token)
