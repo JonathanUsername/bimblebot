@@ -1,6 +1,5 @@
 import discord
 import asyncio
-import yaml
 import logging
 import os
 
@@ -18,6 +17,7 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
+
 @client.event
 async def on_message(message):
     if message.content.startswith('!test'):
@@ -30,10 +30,11 @@ async def on_message(message):
         await client.edit_message(tmp, 'You have {} messages.'.format(counter))
     elif message.content.startswith('!namegame'):
         author = message.author
+
         def check(msg):
             return author.name in msg
         await client.send_message(message.channel, "What's your name?")
-        msg = await client.wait_for_message(author=author, check=check)
+        await client.wait_for_message(author=author, check=check)
         await client.send_message(message.channel, 'Correct.')
 
 
