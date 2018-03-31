@@ -29,7 +29,7 @@ async def on_message(message):
 
         await client.edit_message(tmp, 'You have {} messages.'.format(counter))
     elif message.content.startswith('!namegame'):
-        author = message.author.name
+        author = message.author
         def check(msg):
             return author.name in msg
         await client.send_message(message.channel, "What's your name?")
