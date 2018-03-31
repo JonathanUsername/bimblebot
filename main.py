@@ -33,6 +33,7 @@ async def on_message(message):
 
         def check(msg):
             return author.name in msg.content
+
         await client.send_message(message.channel, "What's your name?")
         await client.wait_for_message(author=author, check=check)
         await client.send_message(message.channel, 'Correct.')
