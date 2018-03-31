@@ -28,9 +28,13 @@ async def on_message(message):
                 counter += 1
 
         await client.edit_message(tmp, 'You have {} messages.'.format(counter))
-    elif message.content.startswith('!sleep'):
-        await asyncio.sleep(5)
-        await client.send_message(message.channel, 'Done sleeping')
+    elif message.content.startswith('!namegame'):
+        author = author.name
+        def check(msg):
+            return author.name in msg
+        await client.send_message(message.channel, "What's your name?")
+        msg = await client.wait_for_message(author=author, check=check)
+        await client.send_message(message.channel, 'Correct.')
 
 
 client.run(token)
