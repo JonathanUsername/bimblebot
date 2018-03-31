@@ -35,4 +35,7 @@ async def on_message(message):
         await asyncio.sleep(5)
         await client.send_message(message.channel, 'Done sleeping')
 
-client.run('token')
+
+with open(".secrets.yaml", 'r') as data:
+    secrets = yaml.safe_load(data)
+    client.run(secrets.token)
