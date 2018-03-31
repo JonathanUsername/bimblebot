@@ -1,7 +1,14 @@
 import discord
 import asyncio
+import yaml
 
 client = discord.Client()
+
+with open(".secrets.yaml", 'r') as data:
+    try:
+        print(yaml.safe_load(data))
+    except yaml.YAMLError as exc:
+        print(exc)
 
 @client.event
 async def on_ready():
