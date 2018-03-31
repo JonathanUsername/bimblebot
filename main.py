@@ -9,7 +9,6 @@ token = os.environ['CLIENT_TOKEN']
 logging.basicConfig(level=logging.INFO)
 
 client = discord.Client()
-server = discord.Server()
 
 
 @client.event
@@ -43,7 +42,7 @@ async def on_message(message):
     elif message.content.startswith('!random'):
         valid_statuses = [discord.Status.online, discord.Status.idle]
         online_members = [
-            m for m in server.get_all_members() if m.status in valid_statuses
+            m for m in message.server.get_all_members() if m.status in valid_statuses
         ]
         return random.choice(online_members)
 
