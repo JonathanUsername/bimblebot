@@ -18,12 +18,6 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-    with open(".secrets.yaml", 'r') as data:
-        try:
-            print(yaml.safe_load(data))
-        except yaml.YAMLError as exc:
-            print(exc)
-
 @client.event
 async def on_message(message):
     if message.content.startswith('!test'):
@@ -39,5 +33,4 @@ async def on_message(message):
         await client.send_message(message.channel, 'Done sleeping')
 
 
-with open(".secrets.yaml", 'r') as data:
-    client.run(token)
+client.run(token)
