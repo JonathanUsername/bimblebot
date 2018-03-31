@@ -7,11 +7,6 @@ logging.basicConfig(level=logging.INFO)
 
 client = discord.Client()
 
-with open(".secrets.yaml", 'r') as data:
-    try:
-        print(yaml.safe_load(data))
-    except yaml.YAMLError as exc:
-        print(exc)
 
 @client.event
 async def on_ready():
@@ -19,6 +14,12 @@ async def on_ready():
     print(client.user.name)
     print(client.user.id)
     print('------')
+
+    with open(".secrets.yaml", 'r') as data:
+	try:
+	    print(yaml.safe_load(data))
+	except yaml.YAMLError as exc:
+	    print(exc)
 
 @client.event
 async def on_message(message):
