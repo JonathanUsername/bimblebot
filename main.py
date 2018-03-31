@@ -1,6 +1,9 @@
 import discord
 import asyncio
 import yaml
+import logging
+
+logging.basicConfig(level=logging.INFO)
 
 client = discord.Client()
 
