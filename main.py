@@ -40,11 +40,26 @@ async def on_message(message):
         await client.wait_for_message(author=author, check=check)
         await client.send_message(message.channel, 'Correct.')
     elif message.content.startswith('!random'):
-        valid_statuses = [discord.Status.online, discord.Status.idle]
-        online_members = [
-            m for m in message.server.get_all_members() if m.status in valid_statuses
+        user = get_random_present_member(message.server)
+        responses = [
+            'Come forward, {}',
+            'I choose you, {}',
+            'Make me proud, {}',
+            'You deserve another go, {}',
+            'Despite my better judgement, it has to be {}',
+            "What's that coming over the hill, is it a monster?? Oh no it's {}",
+            "Safe clart, you knows it's gorra be {}. Tidy.",
+            "{}!! YEAAAAAAAHHHHHH!!111two",
+            "{}ybaby",
         ]
-        return random.choice(online_members)
+        ret = random.choice(responses).format(user.name)
+        await client.send_message(message.channel, ret)
+
+
+def get_random_present_member(server):
+    valid_statuses = [discord.Status.online, discord.Status.idle]
+    online_members = [m for m in server.members if m.status in valid_statuses]
+    return random.choice(online_members)
 
 
 client.run(token)
