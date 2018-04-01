@@ -22,14 +22,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith('!test'):
-        counter = 0
-        tmp = await client.send_message(message.channel,
-                                        'Calculating messages...')
-        async for log in client.logs_from(message.channel, limit=100):
-            if log.author == message.author:
-                counter += 1
-
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
+        await client.change_nickname(message.server.get_member(client.user.id), "bimblebot")
     elif message.content.startswith('!namegame'):
         author = message.author
 
@@ -58,7 +51,7 @@ async def on_message(message):
 
 def get_random_present_member(server):
     valid_statuses = [discord.Status.online]
-    online_members = [m for m in server.members if m.status in valid_statuses]
+    online_members = [m for m in server.members if m.status in valid_statuses and not m.bot]
     return random.choice(online_members)
 
 
