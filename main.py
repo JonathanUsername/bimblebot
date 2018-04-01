@@ -57,7 +57,7 @@ async def on_message(message):
 
 
 def get_random_present_member(server):
-    valid_statuses = [discord.Status.online, discord.Status.idle]
+    valid_statuses = [discord.Status.online]
     online_members = [m for m in server.members if m.status in valid_statuses]
     return random.choice(online_members)
 
