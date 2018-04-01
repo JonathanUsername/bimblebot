@@ -5,6 +5,9 @@ import random
 
 import discord
 
+from consts import VIEWER_DESCRIPTORS, SUMMONING_RESPONSES
+from twitch_utils import get_summary
+
 token = os.environ['CLIENT_TOKEN']
 
 logging.basicConfig(level=logging.INFO)
@@ -35,19 +38,23 @@ async def on_message(message):
         await client.send_message(message.channel, 'Correct.')
     elif message.content.startswith('!random'):
         user = get_random_present_member(message.server)
-        responses = [
-            'Come forward, {}',
-            'I choose you, {}',
-            'Make me proud, {}',
-            'You deserve another go, {}',
-            'Despite my better judgement, it has to be {}',
-            "What's that coming over the hill, is it a monster?? Oh no it's {}",
-            "Safe clart, you knows it's gorra be {}. Tidy.",
-            "{}!! YEAAAAAAAHHHHHH!!111two",
-            "{}ybaby",
-        ]
-        ret = random.choice(responses).format(user.name)
+        ret = random.choice(SUMMONING_RESPONSES).format(user.name)
         await client.send_message(message.channel, ret)
+    elif message.content.startswith('!zlive'):
+        summary = get_summary()
+        if summary:
+            e = discord.Embed()
+            e.set_image(url=summary['preview'])
+            content = "Zoot is playing {} ({}) and {} {} are watching him do it."
+            formatted = content.format(
+                summary['game'],
+                summary['stream_type'],
+                summary['viewers'],
+                random.choice(VIEWER_DESCRIPTORS)
+            )
+            await client.send_message(message.channel, formatted, embed=e)
+        else:
+            await client.send_message(message.channel, "Zoot is not streaming right now.")
 
 
 def get_random_present_member(server):
