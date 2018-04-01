@@ -1,8 +1,9 @@
-import discord
 import asyncio
 import logging
 import os
 import random
+
+import discord
 
 token = os.environ['CLIENT_TOKEN']
 
@@ -22,7 +23,7 @@ async def on_ready():
 @client.event
 async def on_message(message):
     if message.content.startswith('!test'):
-        await client.change_nickname(message.server.get_member(client.user.id), "bimblebot")
+        await client.send_message(message.channel, 'Hello')
     elif message.content.startswith('!namegame'):
         author = message.author
 
