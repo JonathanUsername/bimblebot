@@ -65,6 +65,8 @@ async def on_message(message):
             await client.send_message(message.channel, "Zoot is not streaming right now.")
 
 async def play_sound_for_message(message, sound):
+    def after():
+        client.user.voice.disconnect()
     author = message.author
     voice_channel = author.voice_channel
     try:
@@ -74,7 +76,7 @@ async def play_sound_for_message(message, sound):
     vc = await client.join_voice_channel(voice_channel)
     audio_path = "audio/{}.mp3".format(sound)
     player = vc.create_ffmpeg_player(audio_path)
-    player.start()
+    player.start(after=after)
 
 def get_random_present_member(server):
     valid_statuses = [discord.Status.online]
