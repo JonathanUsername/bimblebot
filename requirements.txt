@@ -10,3 +10,4 @@ websockets==3.4
 gunicorn==19.7.1
 python-twitch-client==0.5.1
 discord.py[voice]
+PyNaCl==1.0.1
