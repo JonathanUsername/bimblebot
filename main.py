@@ -69,8 +69,8 @@ async def play_sound_for_message(message, sound):
         client.user.voice.disconnect()
     author = message.author
     voice_channel = author.voice_channel
-    if hasattr(client.user, 'voice'):
-        await client.user.voice.disconnect()
+    print dir(client.user)
+    await client.user.voice.disconnect()
     vc = await client.join_voice_channel(voice_channel)
     audio_path = "audio/{}.mp3".format(sound)
     player = vc.create_ffmpeg_player(audio_path)
