@@ -27,14 +27,6 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    def play_sound_for_message(message, sound):
-        author = message.author
-        voice_channel = author.voice_channel
-        vc = await client.join_voice_channel(voice_channel)
-        audio_path = "audio/{}.mp3".format(sound)
-        player = vc.create_ffmpeg_player(audio_path)
-        player.start()
-
     if message.content.startswith('!namegame'):
         author = message.author
 
@@ -72,8 +64,13 @@ async def on_message(message):
         else:
             await client.send_message(message.channel, "Zoot is not streaming right now.")
 
-
-
+async def play_sound_for_message(message, sound):
+    author = message.author
+    voice_channel = author.voice_channel
+    vc = await client.join_voice_channel(voice_channel)
+    audio_path = "audio/{}.mp3".format(sound)
+    player = vc.create_ffmpeg_player(audio_path)
+    player.start()
 
 def get_random_present_member(server):
     valid_statuses = [discord.Status.online]
