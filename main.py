@@ -65,7 +65,7 @@ async def on_message(message):
             await client.send_message(message.channel, "Zoot is not streaming right now.")
 
 
-async def play_sound_for_message(message, sound):
+def play_sound_for_message(message, sound):
     author = message.author
     voice_channel = author.voice_channel
     vc = await client.join_voice_channel(voice_channel)
