@@ -41,11 +41,13 @@ async def on_message(message):
         ret = random.choice(SUMMONING_RESPONSES).format(user.name)
         await client.send_message(message.channel, ret)
     elif message.content.startswith('!badzoot'):
-        play_sound_for_message(message, 'badzoot.mp3')
+        play_sound_for_message(message, 'badzoot')
     elif message.content.startswith('!crackfox'):
-        play_sound_for_message(message, 'crackfox.mp3')
+        play_sound_for_message(message, 'crackfox')
     elif message.content.startswith('!laurence'):
-        play_sound_for_message(message, 'laurence.mp3')
+        play_sound_for_message(message, 'laurence')
+    elif message.content.startswith('!slink'):
+        play_sound_for_message(message, 'slink')
     elif message.content.startswith('!zlive'):
         summary = get_summary()
         if summary:
@@ -67,7 +69,8 @@ async def play_sound_for_message(message, sound):
     author = message.author
     voice_channel = author.voice_channel
     vc = await client.join_voice_channel(voice_channel)
-    player = vc.create_ffmpeg_player(sound)
+    audio_path = "audio/{}.mp3".format(sound)
+    player = vc.create_ffmpeg_player(audio_path)
     player.start()
 
 def get_random_present_member(server):
