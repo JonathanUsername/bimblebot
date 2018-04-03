@@ -45,7 +45,7 @@ async def on_message(message):
         voice_channel = author.voice_channel
         vc = await client.join_voice_channel(voice_channel)
 
-        player = await vc.create_ffmpeg_player('badzoot.mp3')
+        player = vc.create_ffmpeg_player('badzoot.mp3')
         player.start()
     elif message.content.startswith('!zlive'):
         summary = get_summary()
