@@ -25,9 +25,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
-    if message.content.startswith('!test'):
-        await client.send_message(message.channel, 'Hello')
-    elif message.content.startswith('!namegame'):
+    if message.content.startswith('!namegame'):
         author = message.author
 
         def check(msg):
@@ -40,6 +38,13 @@ async def on_message(message):
         user = get_random_present_member(message.server)
         ret = random.choice(SUMMONING_RESPONSES).format(user.name)
         await client.send_message(message.channel, ret)
+    elif message.content.startswith('!test'):
+        author = message.author
+        voice_channel = author.voice_channel
+        vc = await client.join_voice_channel(voice_channel)
+
+        player = await vc.create_ffmpeg_player('badzoot.mp3')
+        player.start()
     elif message.content.startswith('!zlive'):
         summary = get_summary()
         if summary:
