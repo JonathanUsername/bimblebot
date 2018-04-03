@@ -42,11 +42,14 @@ async def on_message(message):
         await client.send_message(message.channel, ret)
     elif message.content.startswith('!badzoot'):
         author = message.author
-        voice_channel = author.voice_channel
-        vc = await client.join_voice_channel(voice_channel)
+        try:
+            voice_channel = author.voice_channel
+            vc = await client.join_voice_channel(voice_channel)
 
-        player = vc.create_ffmpeg_player('badzoot.mp3')
-        player.start()
+            player = vc.create_ffmpeg_player('badzoot.mp3')
+            player.start()
+        except:
+            pass
     elif message.content.startswith('!zlive'):
         summary = get_summary()
         if summary:
