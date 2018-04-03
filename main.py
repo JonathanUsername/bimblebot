@@ -17,7 +17,8 @@ client = discord.Client()
 
 @client.event
 async def on_ready():
-    discord.opus.load_opus('opus')
+    if not discord.opus.is_loaded():
+        discord.opus.load_opus('opus')
     print('Logged in as')
     print(client.user.name)
     print(client.user.id)
