@@ -40,7 +40,7 @@ async def on_message(message):
         user = get_random_present_member(message.server)
         ret = random.choice(SUMMONING_RESPONSES).format(user.name)
         await client.send_message(message.channel, ret)
-    elif message.content.startswith('!test'):
+    elif message.content.startswith('!badzoot'):
         author = message.author
         voice_channel = author.voice_channel
         vc = await client.join_voice_channel(voice_channel)
