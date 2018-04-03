@@ -41,15 +41,7 @@ async def on_message(message):
         ret = random.choice(SUMMONING_RESPONSES).format(user.name)
         await client.send_message(message.channel, ret)
     elif message.content.startswith('!badzoot'):
-        author = message.author
-        try:
-            voice_channel = author.voice_channel
-            vc = await client.join_voice_channel(voice_channel)
-
-            player = vc.create_ffmpeg_player('badzoot.mp3')
-            player.start()
-        except:
-            pass
+        play_sound_for_message(message, 'badzoot.mp3')
     elif message.content.startswith('!zlive'):
         summary = get_summary()
         if summary:
@@ -66,6 +58,13 @@ async def on_message(message):
         else:
             await client.send_message(message.channel, "Zoot is not streaming right now.")
 
+
+async def play_sound_for_message(message, sound):
+    author = message.author
+    voice_channel = author.voice_channel
+    vc = await client.join_voice_channel(voice_channel)
+    player = vc.create_ffmpeg_player(sound)
+    player.start()
 
 def get_random_present_member(server):
     valid_statuses = [discord.Status.online]
