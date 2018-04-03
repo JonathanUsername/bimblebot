@@ -44,6 +44,8 @@ async def on_message(message):
         play_sound_for_message(message, 'badzoot.mp3')
     elif message.content.startswith('!crackfox'):
         play_sound_for_message(message, 'crackfox.mp3')
+    elif message.content.startswith('!laurence'):
+        play_sound_for_message(message, 'laurence.mp3')
     elif message.content.startswith('!zlive'):
         summary = get_summary()
         if summary:
