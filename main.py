@@ -42,6 +42,8 @@ async def on_message(message):
         await client.send_message(message.channel, ret)
     elif message.content.startswith('!badzoot'):
         play_sound_for_message(message, 'badzoot.mp3')
+    elif message.content.startswith('!crackfox'):
+        play_sound_for_message(message, 'crackfox.mp3')
     elif message.content.startswith('!zlive'):
         summary = get_summary()
         if summary:
