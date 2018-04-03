@@ -70,7 +70,7 @@ async def play_sound_for_message(message, sound):
     author = message.author
     voice_channel = author.voice_channel
     try:
-        client.user.voice.disconnect()
+        await client.user.voice.disconnect()
     except AttributeError:
         pass
     vc = await client.join_voice_channel(voice_channel)
