@@ -68,11 +68,9 @@ async def play_sound_for_message(message, sound):
     author = message.author
     voice_channel = author.voice_channel
     bot_voice = client.user.voice
-    if bot_voice:
-        if bot_voice.voice_channel != voice_channel:
-            vc = await client.join_voice_channel(voice_channel)
-        else:
-            vc = bot_voice.voice_channel
+    if bot_voice and bot_voice.channel:
+        bot_voice.disconnect()
+    vc = await client.join_voice_channel(voice_channel)
     audio_path = "audio/{}.mp3".format(sound)
     player = vc.create_ffmpeg_player(audio_path)
     player.start()
